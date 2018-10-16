@@ -1674,7 +1674,7 @@ def transformer_base():
   hparams.learning_rate_schedule = (
       "constant*linear_warmup*rsqrt_decay*rsqrt_hidden_size")
   hparams.learning_rate_constant = 2.0
-  hparams.mid_norm_type = 'n'
+  hparams.add_hparam('mid_norm_type', 'n')
   return hparams
 
 
