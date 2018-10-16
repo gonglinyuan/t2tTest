@@ -87,6 +87,7 @@ def create_hparams(hparams_set,
                    problem_name=None):
   """Create HParams with data_dir and problem hparams, if kwargs provided."""
   hparams = registry.hparams(hparams_set)
+  print(hparams)
   if data_dir:
     hparams.add_hparam("data_dir", data_dir)
   if problem_name:
