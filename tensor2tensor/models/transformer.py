@@ -1230,7 +1230,10 @@ def transformer_encoder(encoder_input,
               make_image_summary=make_image_summary,
               dropout_broadcast_dims=attention_dropout_broadcast_dims,
               max_length=hparams.get("max_length"),
-              vars_3d=hparams.get("attention_variables_3d"))
+              vars_3d=hparams.get("attention_variables_3d"),
+              mid_norm_type=hparams.mid_norm_type,
+              norm_epsilon=hparams.norm_epsilon
+          )
           x = common_layers.layer_postprocess(x, y, hparams)
         with tf.variable_scope("ffn"):
           y = transformer_ffn_layer(
@@ -1671,6 +1674,7 @@ def transformer_base():
   hparams.learning_rate_schedule = (
       "constant*linear_warmup*rsqrt_decay*rsqrt_hidden_size")
   hparams.learning_rate_constant = 2.0
+  hparams.mid_norm_type = 'n'
   return hparams
 
 

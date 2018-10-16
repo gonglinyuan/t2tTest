@@ -3324,6 +3324,8 @@ def multihead_attention(query_antecedent,
                         make_image_summary=True,
                         dropout_broadcast_dims=None,
                         vars_3d=False,
+                        mid_norm_type='none',
+                        norm_epsilon=0.0,
                         **kwargs):
   """Multihead scaled-dot-product attention with input/output transformations.
 
@@ -3544,6 +3546,7 @@ def multihead_attention(query_antecedent,
     # Set last dim specifically.
     x.set_shape(x.shape.as_list()[:-1] + [total_value_depth])
 
+    x = common_layers.apply_norm(x, 'none', mid_norm_type, norm_epsilon)
     if vars_3d:
       o_var = tf.get_variable(
           "o", [num_heads, total_value_depth // num_heads, output_depth])
