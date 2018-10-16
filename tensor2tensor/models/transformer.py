@@ -1715,6 +1715,14 @@ def transformer_base_multistep8():
   hparams.optimizer_multistep_accumulate_steps = 8
   return hparams
 
+@registry.register_hparams
+def transformer_base_multistep2():
+  """HParams for simulating 8 GPUs with MultistepAdam optimizer on 4 GPUs."""
+  hparams = transformer_base()
+  hparams.optimizer = "MultistepAdam"
+  hparams.optimizer_multistep_accumulate_steps = 2
+  return hparams
+
 
 @registry.register_hparams
 def transformer_parsing_base():
